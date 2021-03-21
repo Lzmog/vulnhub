@@ -32,3 +32,43 @@ I check what is inside.
 
 ![img.png](img/ftp-mget.png)
 ![img.png](img/message.png)
+
+So, at this moment I don't see anything interesting in welcome message.
+Because of that, I downloaded all zipped files.
+
+![img.png](img/downloaded-zipped-files.png)
+
+Then I tried to unzip first zipped file "anna", and it seems it requires password.
+![img.png](img/password.png)
+
+Maybe John will help us with rockyou.txt list?
+
+IT IS JOHNY TIME
+---------
+
+First I created a shell script, to write all hashes into one file. Script you can find in this folder.
+
+```
+shopt -s nullglob
+for i in *.zip; do
+    [ -f "$i" ] || break
+    sudo zip2john $i >> hashes
+done
+```
+
+Then I added executable rights to the shell file.
+
+![img.png](img/command.png)
+
+Then execute it.
+
+![img.png](img/result-of-echo.png)
+![img.png](img/result-of-hashes.png)
+
+After collecting all hashes it is to check if we get some results from wordlist.
+
+`sudo john hashes -wordlist=rockyou.txt`
+
+![img.png](img/john-hashes.png)
+
+To be continued...
